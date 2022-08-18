@@ -18,15 +18,25 @@ def is_factorial(n):
             return "not factorial"
 
 def isPalindrome(s):
+    """
+
+    :param s: a string
+    :return: checks if a string is a palindrom
+    """
     return s == s[::-1]
 
 def is_prime(n):
-  if (n % 2) == 0:
+    """
+
+        :param s: a string
+        :return: checks if a string is a prime
+        """
+    if (n % 2) == 0:
         return "Come on dude, you know even numbers are not prime!"
-  for i in range(3,n):
-    if (n % i) == 0:
-      return "not prime!"
-  return "prime!"
+    for i in range(3,n):
+        if (n % i) == 0:
+             return "not prime!"
+        return "prime!"
 
 def is_sqrt(n):
     if n == 0 or n == 1:
@@ -50,11 +60,11 @@ def handle_message():
     if input.split()[0] == "/prime":
         respond = is_prime(int(input.split()[1]))
 
-    if input.split()[0] == "/sqrt":
+    elif input.split()[0] == "/sqrt":
         respond = is_sqrt(int(input.split()[1]))
-    if input.split()[0] == "/palindrom":
+    elif input.split()[0] == "/palindrom":
         respond = isPalindrome(str(input.split()[1]))
-    if input.split()[0] == "/factorial":
+    elif input.split()[0] == "/factorial":
         respond = is_factorial(int(input.split()[1]))
     else:
         respond = "got it"
@@ -77,6 +87,5 @@ if __name__ == '__main__':
     app.run(port=5002)
    # response = requests.get(TELEGRAM_INIT_WEBHOOK_URL)
    #print(response.status_code)
-
 
 
