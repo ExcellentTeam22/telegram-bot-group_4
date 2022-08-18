@@ -1,1 +1,48 @@
-hello
+
+#5711334526:AAHd7qg_DfVqrVHU61pC3XincRHBeQ5ggmI
+
+from flask import Flask, Response,request
+import requests
+
+def is_prime(n):
+  if (n % 2) == 0:
+        return "Come on dude, you know even numbers are not prime!"
+  for i in range(3,n):
+    if (n % i) == 0:
+      return "not prime!"
+  return "prime!"
+
+TOKEN = '5711334526:AAHd7qg_DfVqrVHU61pC3XincRHBeQ5ggmI'
+TELEGRAM_INIT_WEBHOOK_URL = 'https://api.telegram.org/bot{}/setWebhook?url=https://b135-82-80-173-170.eu.ngrok.io/message'.format(TOKEN)
+app = Flask(__name__)
+
+@app.route('/message', methods=["POST"])
+def handle_message():
+    print("got message")
+    chat_id = request.get_json()['message']['chat']['id']
+    respond = ''
+    input = request.get_json()['message']['text']
+    print(input)
+    if input.split()[0] == "/prime":
+        respond = is_prime(int(input.split()[1]))
+
+    #print(chat_id)
+
+    res = requests.get("https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}".format(TOKEN, chat_id, respond))
+
+    return Response("success")
+
+
+
+@app.route('/')
+def index():
+    return "<h1>server is runnig!</h1>"
+
+
+if __name__ == '__main__':
+    requests.get(TELEGRAM_INIT_WEBHOOK_URL)
+    app.run(port=5002)
+   # response = requests.get(TELEGRAM_INIT_WEBHOOK_URL)
+   #print(response.status_code)
+
+
