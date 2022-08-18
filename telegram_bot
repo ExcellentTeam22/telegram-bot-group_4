@@ -32,7 +32,7 @@ def isPalindrome(s):
     :param s: a string
     :return: checks if a string is a palindrom
     """
-    return s == s[::-1]
+    return "Palindrome!" if s == s[::-1] else "Not Palindrome"
 
 def is_prime(n):
     """
