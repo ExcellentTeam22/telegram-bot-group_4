@@ -136,6 +136,11 @@ def handle_message():
         delete_dicts()
         res = requests.get(
             "https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}".format(TOKEN, chat_id, "**תודה ולהתראות!**",parse_mode= 'Markdown'))
+    elif input == "עזרה":
+        message = " שלום וברכה! כאן תוכלו למצוא את המחיר הזול ביותר לקניה שלכם! על מנת לעשות זאת- כתבו כאן את רשימת הקניות שלכם ולבסוף הקישו enter.תוכלו להוסיף עוד פריטים ככל שתרצו. לסיום הקישו *סיום* לעזרה הקישו *עזרה* "
+        res = requests.get(
+            "https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}".format(TOKEN, chat_id, message,
+                                                                                   parse_mode='Markdown'))
     else:
         list_of_vegetables, error_message = check_input(input.split())
         if error_message:
